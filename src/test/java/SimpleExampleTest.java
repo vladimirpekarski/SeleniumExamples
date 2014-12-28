@@ -33,8 +33,7 @@ public class SimpleExampleTest {
             driver.get(FIRST_SITE);
             LOG.info("setup finished");
         } catch (Exception e) {
-            LOG.error("Set up fails:" + Arrays.toString(e.getStackTrace())
-                    .replaceAll(",","\n"));
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail();
         }
     }
