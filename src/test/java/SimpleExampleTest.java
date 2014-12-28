@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class SimpleExampleTest {
     private static final Logger LOG = Logger.getLogger(
             SimpleExampleTest.class);
-    private static final String FIRST_SITE = "http://www.tut.by";
+    private static final String FIRST_SITE = "http://www.tut.by/";
     private static final String SECOND_SITE = "http://www.habrahabr.ru/";
     private WebDriver driver;
 
