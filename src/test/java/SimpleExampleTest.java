@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class SimpleExampleTest {
@@ -24,12 +25,18 @@ public class SimpleExampleTest {
 
     @BeforeMethod
     public void setup() throws InterruptedException {
-        driver = new InternetExplorerDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        try {
+            driver = new InternetExplorerDriver();
+            driver.manage().window().maximize();
+            driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
 
-        driver.get(FIRST_SITE);
-        LOG.info("setup finished");
+            driver.get(FIRST_SITE);
+            LOG.info("setup finished");
+        } catch (Exception e) {
+            LOG.error("Set up fails:" + Arrays.toString(e.getStackTrace())
+                    .replaceAll(",","\n"));
+            Assert.fail();
+        }
     }
 
     @AfterMethod
@@ -39,6 +46,11 @@ public class SimpleExampleTest {
 
     @Test
     public void getTest() throws InterruptedException {
-        Assert.assertTrue(driver.getCurrentUrl().contains(FIRST_SITE));
+        try {
+            Assert.assertTrue(driver.getCurrentUrl().contains(FIRST_SITE));
+        } catch (AssertionError e) {
+            LOG.error("Test fails: " + e.getMessage());
+            Assert.fail();
+        }
     }
 }
