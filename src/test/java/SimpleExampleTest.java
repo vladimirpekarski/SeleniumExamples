@@ -28,7 +28,7 @@ public class SimpleExampleTest {
         try {
             driver = new InternetExplorerDriver();
             driver.manage().window().maximize();
-            driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
+            driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
 
             driver.get(FIRST_SITE);
             LOG.info("setup finished");
@@ -46,9 +46,9 @@ public class SimpleExampleTest {
     @Test
     public void getTest() throws InterruptedException {
         try {
-            Assert.assertTrue(driver.getCurrentUrl().contains(FIRST_SITE));
+            Assert.assertEquals(driver.getCurrentUrl(), FIRST_SITE);
         } catch (AssertionError e) {
-            LOG.error("Test fails: " + e.getMessage());
+            LOG.error("TEST FAILS: " + e.getMessage());
             Assert.fail();
         }
     }
