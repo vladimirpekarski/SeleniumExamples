@@ -1,5 +1,6 @@
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.jboss.netty.handler.timeout.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -62,7 +63,7 @@ public class SimpleExampleTest {
             driver.get(SECOND_SITE);
             driver.navigate().back();
 
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, 0);
             wait.until(ExpectedConditions.titleContains("TUT.BY"));
 
             Assert.assertEquals(driver.getCurrentUrl().substring(0, 18),
@@ -70,6 +71,10 @@ public class SimpleExampleTest {
         } catch (AssertionError e) {
             LOG.error("TEST checkingURLAfterBack FAILS: " + e.getMessage());
             Assert.fail();
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail();
+            driver.close();
         }
     }
 }
