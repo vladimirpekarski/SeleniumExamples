@@ -44,7 +44,7 @@ public class SimpleExampleTest {
 
     @AfterMethod
     public void teardown() {
-        driver.close();
+        driver.quit();
     }
 
     @Test
