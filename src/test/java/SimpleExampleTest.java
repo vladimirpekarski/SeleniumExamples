@@ -3,6 +3,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +28,7 @@ public class SimpleExampleTest {
     @BeforeMethod
     public void setup() {
         try {
-            driver = new InternetExplorerDriver();
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
 
             driver.get(FIRST_SITE);
@@ -59,6 +61,9 @@ public class SimpleExampleTest {
         try {
             driver.get(SECOND_SITE);
             driver.navigate().back();
+
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.titleContains("TUT.BY"));
 
             Assert.assertEquals(driver.getCurrentUrl().substring(0, 18),
                     FIRST_SITE);
