@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Test Three Classes">
+<suite name="SimpleExampleTest in different browsers" parallel="tests"
+       thread-count="3">
     <test name="SimpleExampleTest In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
