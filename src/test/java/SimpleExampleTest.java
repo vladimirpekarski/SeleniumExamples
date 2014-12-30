@@ -5,6 +5,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -30,7 +31,7 @@ public class SimpleExampleTest {
     @BeforeMethod
     public void setup() {
         try {
-            driver = new FirefoxDriver();
+            driver = new InternetExplorerDriver();
             driver.manage().window().maximize();
 
             driver.get(FIRST_SITE);
@@ -96,7 +97,9 @@ public class SimpleExampleTest {
         } catch (AssertionError e) {
             LOG.error("TEST checkingURLAfterForward FAILS: " + e.getMessage());
             Assert.fail();
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail();
         }
-
     }
 }
