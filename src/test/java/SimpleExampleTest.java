@@ -1,6 +1,5 @@
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,7 +28,14 @@ public class SimpleExampleTest {
     @Parameters({"browser"})
     public void setup(String browser) {
         try {
-            driver = new InternetExplorerDriver();
+            switch (browser) {
+                case "FireFox": driver = new FirefoxDriver();
+                    break;
+                case "Chrome": driver = new ChromeDriver();
+                    break;
+                case "InternetExplorer": driver = new InternetExplorerDriver();
+                    break;
+            }
             driver.manage().window().maximize();
 
             driver.get(FIRST_SITE);
