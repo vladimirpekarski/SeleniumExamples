@@ -27,7 +27,7 @@ public class SimpleExampleTest {
     @BeforeMethod
     @Parameters({"browser"})
     public void setup(String browser) {
-        LOG.info("setup starts");
+        LOG.info("setup starts for " + browser);
         try {
             switch (browser) {
                 case "FireFox": driver = new FirefoxDriver();
@@ -45,7 +45,7 @@ public class SimpleExampleTest {
             Assert.fail();
             driver.quit();
         }
-        LOG.info("setup finished");
+        LOG.info("setup finished for " + browser);
     }
 
     @AfterMethod
