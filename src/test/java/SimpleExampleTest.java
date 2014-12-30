@@ -27,6 +27,7 @@ public class SimpleExampleTest {
     @BeforeMethod
     @Parameters({"browser"})
     public void setup(String browser) {
+        LOG.info("setup starts");
         try {
             switch (browser) {
                 case "FireFox": driver = new FirefoxDriver();
@@ -39,12 +40,12 @@ public class SimpleExampleTest {
             driver.manage().window().maximize();
 
             driver.get(FIRST_SITE);
-            LOG.info("setup finished");
         } catch (Exception e) {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail();
             driver.quit();
         }
+        LOG.info("setup finished");
     }
 
     @AfterMethod
@@ -54,6 +55,7 @@ public class SimpleExampleTest {
 
     @Test
     public void simpleCheckingURL() {
+        LOG.info("simpleCkeckingURL starts");
         try {
             Assert.assertEquals(driver.getCurrentUrl().substring(0, 18),
                     FIRST_SITE);
@@ -61,10 +63,12 @@ public class SimpleExampleTest {
             LOG.error("TEST simpleCheckingURL FAILS: " + e.getMessage());
             Assert.fail();
         }
+        LOG.info("simpleCkeckingURL finished");
     }
 
     @Test
     public void checkingURLAfterBack() {
+        LOG.info("checkingURLAfterBack starts");
         try {
             driver.get(SECOND_SITE);
             driver.navigate().back();
@@ -81,10 +85,12 @@ public class SimpleExampleTest {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail();
         }
+        LOG.info("checkingURLAfterBack finished");
     }
 
     @Test
     public void checkingURLAfterForward() {
+        LOG.info("checkingURLAfterForward starts");
         try {
             driver.get(SECOND_SITE);
             driver.navigate().back();
@@ -105,5 +111,6 @@ public class SimpleExampleTest {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail();
         }
+        LOG.info("checkingURLAfterForward finished");
     }
 }
