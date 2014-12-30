@@ -2,6 +2,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -40,6 +41,9 @@ public class SimpleExampleTest {
             driver.manage().window().maximize();
 
             driver.get(FIRST_SITE);
+        } catch (WebDriverException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail();
         } catch (Exception e) {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail();
