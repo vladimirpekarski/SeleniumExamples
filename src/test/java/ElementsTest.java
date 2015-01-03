@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ElementsTest {
     private static final String BASE_URL = "http://the-internet.herokuapp.com";
@@ -63,6 +64,16 @@ public class ElementsTest {
 
             WebDriverWait waitForHabr = new WebDriverWait(driver, 5);
             waitForHabr.until(ExpectedConditions.titleContains("The Internet"));
+
+            List<WebElement> checkboxes = driver.findElements(
+                    By.cssSelector("input[type=checkbox]"));
+
+            for (WebElement checkbox: checkboxes) {
+                checkbox.click();
+            }
+
+            Assert.assertTrue(checkboxes.get(0).isSelected());
+            Assert.assertFalse(checkboxes.get(1).isSelected());
 
         } catch (AssertionError e) {
             LOG.error("TEST checkboxesTest FAILS: " + e.getMessage());
