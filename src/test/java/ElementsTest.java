@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -89,7 +90,7 @@ public class ElementsTest {
     }
 
     @Test
-    public void dynamicControlsTest() {
+         public void dynamicControlsTest() {
         LOG.info("dynamicControlsTest starts");
         try {
             WebElement ref = driver.findElement(
@@ -119,7 +120,7 @@ public class ElementsTest {
             Assert.assertTrue(driver.findElement(By.id("message")).isDisplayed());
 
         } catch (AssertionError e) {
-            LOG.error("TEST checkboxesTest FAILS: " + e.getMessage());
+            LOG.error("TEST dynamicControlsTest FAILS: " + e.getMessage());
             Assert.fail("Assert fails");
         } catch (TimeoutException e) {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
@@ -129,5 +130,35 @@ public class ElementsTest {
             Assert.fail("Exception");
         }
         LOG.info("dynamicControlsTest passed");
+    }
+
+    @Test
+    public void dropdownTest() {
+        LOG.info("dropdownTest starts");
+        try {
+            WebElement ref = driver.findElement(
+                    By.cssSelector("a[href='/dropdown']"));
+            ref.click();
+
+            WebDriverWait waitForTitle = new WebDriverWait(driver, 5);
+            waitForTitle.until(ExpectedConditions.titleContains("The Internet"));
+
+            Select dropdownList = new Select(
+                    driver.findElement(By.id("dropdown")));
+
+
+
+
+        } catch (AssertionError e) {
+            LOG.error("TEST dropdownTest FAILS: " + e.getMessage());
+            Assert.fail("Assert fails");
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Timeout Exception");
+        } catch (Exception e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Exception");
+        }
+        LOG.info("dropdownTest passed");
     }
 }
