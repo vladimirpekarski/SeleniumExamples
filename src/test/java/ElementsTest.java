@@ -1,9 +1,6 @@
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -27,7 +24,7 @@ public class ElementsTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(@Optional("FireFox")String browser) {
+    public void setup(@Optional("InternetExplorer")String browser) {
         LOG.info("setup starts for " + browser);
         try {
             switch (browser) {
@@ -59,13 +56,23 @@ public class ElementsTest {
 
     @Test
     public void checkboxesTest() {
-        WebElement ref = driver.findElement(By.linkText("Checkboxes"));
-        ref.click();
+        LOG.info("checkboxesTest starts");
+        try {
+            WebElement ref = driver.findElement(By.cssSelector("a[href='/checkboxes']"));
+            ref.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.titleContains("The Internet"));
+            WebDriverWait waitForHabr = new WebDriverWait(driver, 5);
+            waitForHabr.until(ExpectedConditions.titleContains("The Internet"));
 
-
+        } catch (AssertionError e) {
+            LOG.error("TEST checkboxesTest FAILS: " + e.getMessage());
+            Assert.fail("Assert fails");
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Timeout Exception");
+        } catch (Exception e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Exception");
+        }
     }
-
 }
