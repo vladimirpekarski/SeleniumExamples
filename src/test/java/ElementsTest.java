@@ -96,8 +96,8 @@ public class ElementsTest {
                     By.cssSelector("a[href='/dynamic_controls']"));
             ref.click();
 
-            WebDriverWait waitForHabr = new WebDriverWait(driver, 5);
-            waitForHabr.until(ExpectedConditions.titleContains("The Internet"));
+            WebDriverWait waitForTitle = new WebDriverWait(driver, 5);
+            waitForTitle.until(ExpectedConditions.titleContains("The Internet"));
 
             WebElement buttonRemove = driver.findElement(By.id("btn"));
             WebElement radiobutton = driver.findElement(
@@ -109,6 +109,12 @@ public class ElementsTest {
             Assert.assertEquals(buttonRemove.getText().trim(), "Remove");
             Assert.assertEquals(
                     textForRadiobutton.getText().trim(), "A checkbox");
+
+            buttonRemove.click();
+            WebDriverWait waitForChanges = new WebDriverWait(driver, 20);
+            waitForChanges.until(ExpectedConditions.invisibilityOfElementLocated(
+                    (By.cssSelector("div#checkbox"))));
+
 
 
         } catch (AssertionError e) {

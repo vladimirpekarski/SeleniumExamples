@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Elements in different browsers" parallel="tests"
-       thread-count="3">
+       thread-count="2">
     <test name="ElementsTest In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
