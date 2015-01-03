@@ -25,7 +25,7 @@ public class ElementsTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(@Optional("Chrome")String browser) {
+    public void setup(String browser) {
         LOG.info("setup starts for " + browser);
         try {
             switch (browser) {
