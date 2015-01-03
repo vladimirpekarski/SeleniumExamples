@@ -42,7 +42,11 @@
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>
-                            ${basedir}/src/test/testngNavigation.xml</suiteXmlFile>
+                            ${basedir}/src/test/testngNavigation.xml
+                        </suiteXmlFile>
+                        <suiteXmlFile>
+                            ${basedir}/src/test/testngElements.xml
+                        </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
