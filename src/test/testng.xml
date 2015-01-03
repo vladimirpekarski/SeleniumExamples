@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="SimpleExampleTest in different browsers" parallel="tests"
+<suite name="NavigationTest in different browsers" parallel="tests"
        thread-count="3">
-    <test name="SimpleExampleTest In FireFox">
+    <test name="NavigationTest In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="SimpleExampleTest" />
+            <class name="NavigationTest" />
         </classes>
     </test>
-    <test name="SimpleExampleTest In Chrome">
+    <test name="NavigationTest In Chrome">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="SimpleExampleTest" />
+            <class name="NavigationTest" />
         </classes>
     </test>
-    <test name="SimpleExampleTest In InternetExplorer">
+    <test name="NavigationTest In InternetExplorer">
         <parameter name="browser" value="InternetExplorer"/>
         <classes>
-            <class name="SimpleExampleTest" />
+            <class name="NavigationTest" />
         </classes>
     </test>
 </suite>

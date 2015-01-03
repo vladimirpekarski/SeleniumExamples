@@ -13,9 +13,9 @@ import org.testng.annotations.*;
 
 import java.util.Arrays;
 
-public class SimpleExampleTest {
+public class NavigationTest {
     private static final Logger LOG = Logger.getLogger(
-            SimpleExampleTest.class);
+            NavigationTest.class);
     private static final String FIRST_SITE = "http://www.tut.by/";
     private static final String SECOND_SITE = "http://habrahabr.ru/";
     private WebDriver driver;
