@@ -25,7 +25,7 @@ public class ElementsTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(String browser) {
+    public void setup(@Optional("InternetExplorer")String browser) {
         LOG.info("setup starts for " + browser);
         try {
             switch (browser) {
@@ -85,5 +85,42 @@ public class ElementsTest {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail("Exception");
         }
+        LOG.info("checkboxesTest passed");
+    }
+
+    @Test
+    public void dynamicControls() {
+        LOG.info("dynamicControls starts");
+        try {
+            WebElement ref = driver.findElement(
+                    By.cssSelector("a[href='/dynamic_controls']"));
+            ref.click();
+
+            WebDriverWait waitForHabr = new WebDriverWait(driver, 5);
+            waitForHabr.until(ExpectedConditions.titleContains("The Internet"));
+
+            WebElement buttonRemove = driver.findElement(By.id("btn"));
+            WebElement radiobutton = driver.findElement(
+                    By.cssSelector("input#checkbox"));
+            WebElement textForRadiobutton = driver.findElement(
+                    By.cssSelector("div#checkbox"));
+
+            Assert.assertFalse(radiobutton.isSelected());
+            Assert.assertEquals(buttonRemove.getText().trim(), "Remove");
+            Assert.assertEquals(
+                    textForRadiobutton.getText().trim(), "A checkbox");
+
+
+        } catch (AssertionError e) {
+            LOG.error("TEST checkboxesTest FAILS: " + e.getMessage());
+            Assert.fail("Assert fails");
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Timeout Exception");
+        } catch (Exception e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Exception");
+        }
+        LOG.info("dynamicControls passed");
     }
 }
