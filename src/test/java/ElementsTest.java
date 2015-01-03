@@ -111,11 +111,12 @@ public class ElementsTest {
                     textForRadiobutton.getText().trim(), "A checkbox");
 
             buttonRemove.click();
-            WebDriverWait waitForChanges = new WebDriverWait(driver, 20);
+            WebDriverWait waitForChanges = new WebDriverWait(driver, 10);
             waitForChanges.until(ExpectedConditions.invisibilityOfElementLocated(
                     (By.cssSelector("div#checkbox"))));
 
-
+            Assert.assertEquals(buttonRemove.getText().trim(), "Add");
+            Assert.assertTrue(driver.findElement(By.id("message")).isDisplayed());
 
         } catch (AssertionError e) {
             LOG.error("TEST checkboxesTest FAILS: " + e.getMessage());
