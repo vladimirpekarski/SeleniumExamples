@@ -89,8 +89,8 @@ public class ElementsTest {
     }
 
     @Test
-    public void dynamicControls() {
-        LOG.info("dynamicControls starts");
+    public void dynamicControlsTest() {
+        LOG.info("dynamicControlsTest starts");
         try {
             WebElement ref = driver.findElement(
                     By.cssSelector("a[href='/dynamic_controls']"));
@@ -127,6 +127,6 @@ public class ElementsTest {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail("Exception");
         }
-        LOG.info("dynamicControls passed");
+        LOG.info("dynamicControlsTest passed");
     }
 }
