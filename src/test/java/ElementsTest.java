@@ -1,3 +1,4 @@
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.*;
@@ -12,6 +13,7 @@ import org.testng.annotations.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ElementsTest {
     private static final String BASE_URL = "http://the-internet.herokuapp.com";
@@ -48,7 +50,9 @@ public class ElementsTest {
             Assert.fail();
             driver.quit();
         }
+
         LOG.info("setup finished for " + browser);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @AfterMethod
@@ -62,9 +66,6 @@ public class ElementsTest {
         try {
             WebElement ref = driver.findElement(By.cssSelector("a[href='/checkboxes']"));
             ref.click();
-
-            WebDriverWait waitForHabr = new WebDriverWait(driver, 5);
-            waitForHabr.until(ExpectedConditions.titleContains("The Internet"));
 
             List<WebElement> checkboxes = driver.findElements(
                     By.cssSelector("input[type=checkbox]"));
@@ -97,9 +98,6 @@ public class ElementsTest {
                     By.cssSelector("a[href='/dynamic_controls']"));
             ref.click();
 
-            WebDriverWait waitForTitle = new WebDriverWait(driver, 10);
-            waitForTitle.until(ExpectedConditions.titleContains("The Internet"));
-
             WebElement buttonRemove = driver.findElement(By.id("btn"));
             WebElement radiobutton = driver.findElement(
                     By.cssSelector("input#checkbox"));
@@ -112,7 +110,7 @@ public class ElementsTest {
                     textForRadiobutton.getText().trim(), "A checkbox");
 
             buttonRemove.click();
-            WebDriverWait waitForChanges = new WebDriverWait(driver, 10);
+            WebDriverWait waitForChanges = new WebDriverWait(driver, 5);
             waitForChanges.until(ExpectedConditions.invisibilityOfElementLocated(
                     (By.cssSelector("div#checkbox"))));
 
@@ -140,9 +138,6 @@ public class ElementsTest {
                     By.cssSelector("a[href='/dropdown']"));
             ref.click();
 
-            WebDriverWait waitForTitle = new WebDriverWait(driver, 5);
-            waitForTitle.until(ExpectedConditions.titleContains("The Internet"));
-
             Select dropdownList = new Select(
                     driver.findElement(By.id("dropdown")));
 
@@ -158,7 +153,6 @@ public class ElementsTest {
             Assert.assertEquals("Option 2",
                     dropdownList.getFirstSelectedOption().getText());
 
-
         } catch (AssertionError e) {
             LOG.error("TEST dropdownTest FAILS: " + e.getMessage());
             Assert.fail("Assert fails");
@@ -170,5 +164,42 @@ public class ElementsTest {
             Assert.fail("Exception");
         }
         LOG.info("dropdownTest passed");
+    }
+
+    @Test
+    public void loginFormTest() {
+        LOG.info("loginFormTest starts");
+        try {
+            WebElement ref = driver.findElement(
+                    By.cssSelector("a[href='/login']"));
+            ref.click();
+
+            WebElement userNameField = driver.findElement(By.id("username"));
+            WebElement passwordField = driver.findElement(By.id("password"));
+            WebElement buttonLogin = driver.findElement(
+                    By.cssSelector("button[type = 'submit']"));
+
+            userNameField.sendKeys("tomsmith");
+            passwordField.sendKeys("SuperSecretPassword!");
+            buttonLogin.click();
+
+            WebElement logOutButton = driver.findElement(By.cssSelector
+                    ("a[href = '/logout']"));
+            logOutButton.click();
+
+        } catch (AssertionError e) {
+            LOG.error("TEST loginFormTest FAILS: " + e.getMessage());
+            Assert.fail("Assert fails");
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Timeout Exception");
+        } catch (ElementNotFoundException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Element Not Found");
+        } catch (Exception e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Exception");
+        }
+        LOG.info("loginFormTest passed");
     }
 }
