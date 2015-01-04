@@ -52,7 +52,7 @@ public class ElementsTest {
         }
 
         LOG.info("setup finished for " + browser);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterMethod
