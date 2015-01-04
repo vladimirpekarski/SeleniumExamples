@@ -167,8 +167,8 @@ public class ElementsTest {
     }
 
     @Test
-    public void loginFormTest() {
-        LOG.info("loginFormTest starts");
+    public void loginFormTestPositive() {
+        LOG.info("loginFormTestPositive starts");
         try {
             WebElement ref = driver.findElement(
                     By.cssSelector("a[href='/login']"));
@@ -187,8 +187,10 @@ public class ElementsTest {
                     ("a[href = '/logout']"));
             logOutButton.click();
 
+            Assert.assertTrue(driver.getPageSource().contains("Login Page"));
+
         } catch (AssertionError e) {
-            LOG.error("TEST loginFormTest FAILS: " + e.getMessage());
+            LOG.error("TEST loginFormTestPositive FAILS: " + e.getMessage());
             Assert.fail("Assert fails");
         } catch (TimeoutException e) {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
@@ -200,6 +202,47 @@ public class ElementsTest {
             LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
             Assert.fail("Exception");
         }
-        LOG.info("loginFormTest passed");
+        LOG.info("loginFormTestPositive passed");
+    }
+
+    @Test
+    public void loginFormTestNegative() {
+        LOG.info("loginFormTestNegative starts");
+        try {
+            WebElement ref = driver.findElement(
+                    By.cssSelector("a[href='/login']"));
+            ref.click();
+
+            WebElement userNameField = driver.findElement(By.id("username"));
+            WebElement passwordField = driver.findElement(By.id("password"));
+            WebElement buttonLogin = driver.findElement(
+                    By.cssSelector("button[type = 'submit']"));
+
+            userNameField.sendKeys("test");
+            passwordField.sendKeys("SuperSecretPassword!");
+            buttonLogin.click();
+
+            WebDriverWait waitForError = new WebDriverWait(driver, 5);
+            waitForError.until(ExpectedConditions.visibilityOf(
+                    driver.findElement(
+                            By.cssSelector("div[class = 'flash error']"))));
+
+            Assert.assertTrue(
+                    driver.getPageSource().contains("Your username is invalid!"));
+
+        } catch (AssertionError e) {
+            LOG.error("TEST loginFormTestNegative FAILS: " + e.getMessage());
+            Assert.fail("Assert fails");
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Timeout Exception");
+        } catch (ElementNotFoundException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Element Not Found");
+        } catch (Exception e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Exception");
+        }
+        LOG.info("loginFormTestNegative passed");
     }
 }
