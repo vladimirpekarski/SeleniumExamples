@@ -90,14 +90,14 @@ public class ElementsTest {
     }
 
     @Test
-         public void dynamicControlsTest() {
+    public void dynamicControlsTest() {
         LOG.info("dynamicControlsTest starts");
         try {
             WebElement ref = driver.findElement(
                     By.cssSelector("a[href='/dynamic_controls']"));
             ref.click();
 
-            WebDriverWait waitForTitle = new WebDriverWait(driver, 5);
+            WebDriverWait waitForTitle = new WebDriverWait(driver, 10);
             waitForTitle.until(ExpectedConditions.titleContains("The Internet"));
 
             WebElement buttonRemove = driver.findElement(By.id("btn"));
@@ -146,7 +146,17 @@ public class ElementsTest {
             Select dropdownList = new Select(
                     driver.findElement(By.id("dropdown")));
 
+            Assert.assertFalse(dropdownList.isMultiple());
 
+            Assert.assertEquals(3, dropdownList.getOptions().size());
+
+            dropdownList.selectByVisibleText("Option 1");
+            Assert.assertEquals("Option 1",
+                    dropdownList.getFirstSelectedOption().getText());
+
+            dropdownList.selectByValue("2");
+            Assert.assertEquals("Option 2",
+                    dropdownList.getFirstSelectedOption().getText());
 
 
         } catch (AssertionError e) {
