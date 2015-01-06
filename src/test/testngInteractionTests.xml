@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="testngInteractionTests in different browsers" parallel="tests"
+       thread-count="1">
+    <test name="testngInteractionTests In FireFox">
+        <parameter name="browser" value="FireFox"/>
+        <classes>
+            <class name="interactions.interactionsTests" />
+        </classes>
+    </test>
+</suite>
