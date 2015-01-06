@@ -1,4 +1,4 @@
-package iteractions;
+package interactions;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.apache.log4j.Logger;
@@ -15,10 +15,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class iteractionsTest {
+public class interactionsTests {
     private static final String BASE_URL = "http://the-internet.herokuapp.com";
     private static final Logger LOG = Logger.getLogger(
-            iteractionsTest.class);
+            interactionsTests.class);
     private WebDriver driver;
 
     @BeforeTest
@@ -28,7 +28,7 @@ public class iteractionsTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(@Optional("InternetExplorer")String browser) {
+    public void setup(@Optional("FireFox")String browser) {
         LOG.info("setup starts for " + browser);
         try {
             switch (browser) {
@@ -128,6 +128,56 @@ public class iteractionsTest {
             Assert.fail("Exception");
         }
         LOG.info("hoverTest passed");
+    }
+
+    @Test
+    public void contentMenu() {
+        LOG.info("contentMenu starts");
+        try {
+            WebElement ref = driver.findElement(
+                    By.cssSelector("a[href='/context_menu']"));
+
+            ref.click();
+            Actions actions = new Actions(driver);
+            WebElement box = driver.findElement(By.id("hot-spot"));
+
+            actions.moveToElement(box).contextClick().
+                    sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).
+                        sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).
+                            sendKeys(Keys.DOWN).sendKeys(Keys.ENTER).perform();
+
+            Thread.sleep(3000);
+
+            Alert promt = driver.switchTo().alert();
+            Assert.assertEquals(promt.getText(), "You selected a context menu");
+
+            promt.accept();
+
+            Assert.assertFalse(isAlertPresent(driver));
+
+        } catch (AssertionError e) {
+            LOG.error("TEST contentMenu FAILS: " + e.getMessage());
+            Assert.fail("Assert fails");
+        } catch (TimeoutException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Timeout Exception");
+        } catch (ElementNotFoundException e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Element Not Found");
+        } catch (Exception e) {
+            LOG.error(Arrays.toString(e.getStackTrace()).replaceAll(",","\n"));
+            Assert.fail("Exception");
+        }
+        LOG.info("contentMenu passed");
+    }
+
+    public static boolean isAlertPresent(WebDriver driver) {
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
     }
 
 }
