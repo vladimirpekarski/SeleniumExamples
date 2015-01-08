@@ -13,10 +13,4 @@
             <class name="interactions.interactionsTestsHomeWork" />
         </classes>
     </test>
-    <test name="testngInteractionTestsHomeWork In InternetExplorer">
-        <parameter name="browser" value="InternetExplorer"/>
-        <classes>
-            <class name="interactions.interactionsTestsHomeWork" />
-        </classes>
-    </test>
 </suite>
