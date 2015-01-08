@@ -50,6 +50,9 @@
                         <suiteXmlFile>
                             ${basedir}/src/test/testngInteractionTests.xml
                         </suiteXmlFile>
+                        <suiteXmlFile>
+                            ${basedir}/src/test/testngInteractionsTestsHomeWork.xml
+                        </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
