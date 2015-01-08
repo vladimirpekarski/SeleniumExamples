@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="testngInteractionTestsHomeWork in different browsers"
+       parallel="tests" thread-count="2">
+    <test name="testngInteractionTestsHomeWork In FireFox">
+        <parameter name="browser" value="FireFox"/>
+        <classes>
+            <class name="interactions.interactionsTestsHomeWork" />
+        </classes>
+    </test>
+    <test name="testngInteractionTestsHomeWork In Chrome">
+        <parameter name="browser" value="Chrome"/>
+        <classes>
+            <class name="interactions.interactionsTestsHomeWork" />
+        </classes>
+    </test>
+    <test name="testngInteractionTestsHomeWork In InternetExplorer">
+        <parameter name="browser" value="InternetExplorer"/>
+        <classes>
+            <class name="interactions.interactionsTestsHomeWork" />
+        </classes>
+    </test>
+</suite>
