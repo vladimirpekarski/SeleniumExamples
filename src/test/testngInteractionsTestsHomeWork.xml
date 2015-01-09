@@ -4,13 +4,13 @@
     <test name="testngInteractionTestsHomeWork In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="interactions.InteractionsTestsHomeWork" />
+            <class name="interactions.interactionsTestsHomeWork" />
         </classes>
     </test>
     <test name="testngInteractionTestsHomeWork In Chrome">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="interactions.InteractionsTestsHomeWork" />
+            <class name="interactions.interactionsTestsHomeWork" />
         </classes>
     </test>
 </suite>
