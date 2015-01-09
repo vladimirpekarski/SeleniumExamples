@@ -4,7 +4,7 @@
     <test name="testngInteractionTests In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="interactions.interactionsTests" />
+            <class name="interactions.InteractionsTests" />
         </classes>
     </test>
 </suite>
