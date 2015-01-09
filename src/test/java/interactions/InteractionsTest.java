@@ -15,10 +15,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class interactionsTests {
+public class InteractionsTest {
     private static final String BASE_URL = "http://the-internet.herokuapp.com";
     private static final Logger LOG = Logger.getLogger(
-            interactionsTests.class);
+            InteractionsTest.class);
     private WebDriver driver;
 
     @BeforeTest
