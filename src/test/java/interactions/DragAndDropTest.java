@@ -51,19 +51,8 @@ public class DragAndDropTest {
         Assert.assertEquals(columnB.getText(), "B");
 
         Actions actions = new Actions(driver);
-//        actions.moveToElement(columnA).perform();
-//        Thread.sleep(1000);
-//        actions.clickAndHold().perform();
-//        Thread.sleep(1000);
-//        actions.moveToElement(columnB).release().perform();
-//        Thread.sleep(1000);
-
         actions.moveToElement(columnA).clickAndHold(columnA).moveToElement(columnB)
                 .release().perform();
-//
-//        Actions builder = new Actions(driver);
-//        builder.moveToElement(draggable).clickAndHold();
-//        builder.moveToElement(target).click().perform();
 
         Assert.assertEquals(columnA.getText(), "B");
         Assert.assertEquals(columnB.getText(), "A");
