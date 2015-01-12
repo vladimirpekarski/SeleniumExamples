@@ -11,7 +11,7 @@ import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class InteractionsTestHomeWork {
+public class InteractionsHomeWorkTest {
     private static final String BASE_URL = "http://the-internet.herokuapp.com";
     private WebDriver driver;
 

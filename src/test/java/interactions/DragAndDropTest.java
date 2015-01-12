@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
@@ -16,7 +18,7 @@ public class DragAndDropTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(@Optional("FireFox")String browser) {
+    public void setup(@Optional("Chrome")String browser) {
         switch (browser) {
             case "FireFox": driver = new FirefoxDriver();
                 break;
@@ -38,10 +40,33 @@ public class DragAndDropTest {
     }
 
     @Test
-    public void dragAndDropTest() {
+    public void dragAndDropTest() throws InterruptedException {
         WebElement ref = driver.findElement(
-                By.cssSelector("a[href='/key_presses']"));
-        String letters = "ABCDEFGHIKLMOPQRSTXYZVJUW";
+                By.cssSelector("a[href='/drag_and_drop']"));
         ref.click();
+        WebElement columnA = driver.findElement(By.id("column-a"));
+        WebElement columnB = driver.findElement(By.id("column-b"));
+
+        Assert.assertEquals(columnA.getText(), "A");
+        Assert.assertEquals(columnB.getText(), "B");
+
+        Actions actions = new Actions(driver);
+//        actions.moveToElement(columnA).perform();
+//        Thread.sleep(1000);
+//        actions.clickAndHold().perform();
+//        Thread.sleep(1000);
+//        actions.moveToElement(columnB).release().perform();
+//        Thread.sleep(1000);
+
+        actions.moveToElement(columnA).clickAndHold(columnA).moveToElement(columnB)
+                .release().perform();
+//
+//        Actions builder = new Actions(driver);
+//        builder.moveToElement(draggable).clickAndHold();
+//        builder.moveToElement(target).click().perform();
+
+        Assert.assertEquals(columnA.getText(), "B");
+        Assert.assertEquals(columnB.getText(), "A");
+
     }
 }
