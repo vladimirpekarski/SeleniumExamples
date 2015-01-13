@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Elements in different browsers" parallel="tests"
        thread-count="2">
-    <test name="ElementsTest In FireFox">
+    <test name="selemiunlocators.ElementsTest In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="ElementsTest" />
+            <class name="selemiunlocators.ElementsTest" />
         </classes>
     </test>
-    <test name="ElementsTest In Chrome">
+    <test name="selemiunlocators.ElementsTest In Chrome">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="ElementsTest" />
+            <class name="selemiunlocators.ElementsTest" />
         </classes>
     </test>
-    <test name="ElementsTest In InternetExplorer">
+    <test name="selemiunlocators.ElementsTest In InternetExplorer">
         <parameter name="browser" value="InternetExplorer"/>
         <classes>
-            <class name="ElementsTest" />
+            <class name="selemiunlocators.ElementsTest" />
         </classes>
     </test>
 </suite>

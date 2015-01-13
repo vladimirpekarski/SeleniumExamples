@@ -1,3 +1,5 @@
+package selemiunlocators;
+
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;

@@ -1,6 +1,5 @@
-package interactions;
+package pageobjecttest;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,18 +7,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import pageobjectpattern.staticpageobject.LoginPage;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class TabsTest {
+/**
+ * Created by asus on 12.01.15.
+ */
+public class StaticPageObjectTest {
     private static final String
-            BASE_URL = "http://www.w3schools.com/html/html5_draganddrop.asp";
+            BASE_URL = "http://the-internet.herokuapp.com/login";
     private WebDriver driver;
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void setup(@Optional("InternetExplorer")String browser) {
+    public void setup(@Optional("FireFox")String browser) {
         switch (browser) {
             case "FireFox": driver = new FirefoxDriver();
                 break;
@@ -41,24 +43,15 @@ public class TabsTest {
     }
 
     @Test
-    public void tabsTests() throws InterruptedException {
-        WebElement tryYourSelfButton = driver.findElement(
-                By.cssSelector(".tryitbtn"));
+    public void pageObjectStaticLoginTest() {
+        WebElement usernameField = driver.findElement(LoginPage.usernameField);
+        WebElement passwordField = driver.findElement(LoginPage.passwordField);
+        WebElement loginButton = driver.findElement(LoginPage.loginButton);
 
-        Assert.assertEquals(driver.getWindowHandles().size(), 1);
-        tryYourSelfButton.click();
+        usernameField.sendKeys("tomsmith");
+        passwordField.sendKeys("SuperSecretPassword!");
+        loginButton.click();
 
-        Assert.assertEquals(driver.getWindowHandles().size(), 2);
-        ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
-
-        driver.switchTo().window(handles.get(0));
-        Assert.assertEquals("HTML5 Drag and Drop", driver.getTitle());
-
-
-        driver.switchTo().window(handles.get(1));
-        Assert.assertEquals("Tryit Editor v2.3", driver.getTitle());
-
-        driver.close();
-        Assert.assertEquals(driver.getWindowHandles().size(), 1);
+        Assert.assertTrue(driver.getPageSource().contains("Secure Area"));
     }
 }

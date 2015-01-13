@@ -1,4 +1,4 @@
-package interactions;
+package selemiunlocators.interactions;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import org.apache.log4j.Logger;

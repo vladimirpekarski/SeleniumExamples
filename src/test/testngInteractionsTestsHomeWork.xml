@@ -4,13 +4,13 @@
     <test name="testngInteractionTestsHomeWork In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="interactions.InteractionsHomeWorkTest" />
+            <class name="selemiunlocators.interactions.InteractionsHomeWorkTest" />
         </classes>
     </test>
     <test name="testngInteractionTestsHomeWork In Chrome">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="interactions.InteractionsHomeWorkTest" />
+            <class name="selemiunlocators.interactions.InteractionsHomeWorkTest" />
         </classes>
     </test>
 </suite>

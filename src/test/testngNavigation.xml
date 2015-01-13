@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="NavigationTest in different browsers" parallel="tests"
+<suite name="selemiunlocators.NavigationTest in different browsers" parallel="tests"
        thread-count="2">
-    <test name="NavigationTest In FireFox">
+    <test name="selemiunlocators.NavigationTest In FireFox">
         <parameter name="browser" value="FireFox"/>
         <classes>
-            <class name="NavigationTest" />
+            <class name="selemiunlocators.NavigationTest" />
         </classes>
     </test>
-    <test name="NavigationTest In Chrome">
+    <test name="selemiunlocators.NavigationTest In Chrome">
         <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="NavigationTest" />
+            <class name="selemiunlocators.NavigationTest" />
         </classes>
     </test>
-    <test name="NavigationTest In InternetExplorer">
+    <test name="selemiunlocators.NavigationTest In InternetExplorer">
         <parameter name="browser" value="InternetExplorer"/>
         <classes>
-            <class name="NavigationTest" />
+            <class name="selemiunlocators.NavigationTest" />
         </classes>
     </test>
 </suite>

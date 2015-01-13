@@ -1,3 +1,5 @@
+package selemiunlocators;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.TimeoutException;
