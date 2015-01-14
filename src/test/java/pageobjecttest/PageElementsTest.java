@@ -1,17 +1,19 @@
-package customwaiters;
+package pageobjecttest;
 
-import helpers.Waiters;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.*;
+import pageobjectpattern.ElementsPage;
 
-public class WaitForAnyAlertTest {
+import java.util.concurrent.TimeUnit;
+
+public class PageElementsTest {
     private static final String
-            FIRST_SITE = "http://the-internet.herokuapp.com/javascript_alerts";
+            BASE_URL = "http://www.yandex.by/";
     private WebDriver driver;
+    private ElementsPage page;
 
     @BeforeMethod
     @Parameters({"browser"})
@@ -25,10 +27,12 @@ public class WaitForAnyAlertTest {
                 break;
         }
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 
-        driver.get(FIRST_SITE);
+        driver.get(BASE_URL);
+        page = new ElementsPage(driver);
     }
-
 
     @AfterMethod
     public void teardown() {
@@ -36,16 +40,8 @@ public class WaitForAnyAlertTest {
     }
 
     @Test
-    public void anyAlertPositiveTest() {
-        driver.findElement(By.cssSelector("button[onclick='jsAlert()']"))
-                .click();
-        Waiters.waitForAnyAlert(driver);
-    }
-
-    @Test
-    public void anyAlertNegativeTest() {
-        driver.findElement(By.cssSelector("button[onclick='false']"))
-                .click();
-        Waiters.waitForAnyAlert(driver);
+    public void test() throws InterruptedException {
+        page.find("Bla Bla");
+        Thread.sleep(8000);
     }
 }

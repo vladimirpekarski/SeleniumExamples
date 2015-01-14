@@ -1,17 +1,20 @@
-package customwaiters;
+package pageobjecttest.flowpage;
 
-import helpers.Waiters;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.*;
+import pageobjectpattern.flowpages.LoginPageFlow;
 
-public class WaitForAnyAlertTest {
+import java.util.concurrent.TimeUnit;
+
+public class FlowPageTest {
     private static final String
-            FIRST_SITE = "http://the-internet.herokuapp.com/javascript_alerts";
+            BASE_URL = "http://the-internet.herokuapp.com/login";
     private WebDriver driver;
+    private LoginPageFlow loginPageFlow;
 
     @BeforeMethod
     @Parameters({"browser"})
@@ -25,10 +28,12 @@ public class WaitForAnyAlertTest {
                 break;
         }
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        driver.get(BASE_URL);
 
-        driver.get(FIRST_SITE);
+        loginPageFlow = new LoginPageFlow(driver);
     }
-
 
     @AfterMethod
     public void teardown() {
@@ -36,16 +41,7 @@ public class WaitForAnyAlertTest {
     }
 
     @Test
-    public void anyAlertPositiveTest() {
-        driver.findElement(By.cssSelector("button[onclick='jsAlert()']"))
-                .click();
-        Waiters.waitForAnyAlert(driver);
-    }
+    public void pageObjectFlowTest() {
 
-    @Test
-    public void anyAlertNegativeTest() {
-        driver.findElement(By.cssSelector("button[onclick='false']"))
-                .click();
-        Waiters.waitForAnyAlert(driver);
     }
 }

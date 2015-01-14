@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
  * Created by asus on 12.01.15.
  */
 public class LoginPageFlow {
-    WebDriver driver;
+    private WebDriver driver;
     private WebElement usernameField = driver.findElement(By.id("username"));
     private WebElement passwordField = driver.findElement(By.id("password"));
     private WebElement loginButton =  driver.findElement(
@@ -19,8 +19,17 @@ public class LoginPageFlow {
     }
 
     public LoginPageFlow typeUserName(String username) {
-        usernameField.sendKeys("tomsmith");
+        usernameField.sendKeys(username);
         return this;
+    }
+
+    public LoginPageFlow typeUserPassword(String password) {
+        passwordField.sendKeys(password);
+        return this;
+    }
+
+    public void clickLoginButton() {
+        loginButton.click();
     }
 
 }
