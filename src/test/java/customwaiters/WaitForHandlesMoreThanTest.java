@@ -8,7 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.*;
 
-public class WaitForHanfkesMoreThanTest {
+public class WaitForHandlesMoreThanTest {
     private static final String
             FIRST_SITE = "http://www.w3schools.com/html/html5_draganddrop.asp";
     private WebDriver driver;
