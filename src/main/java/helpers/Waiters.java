@@ -65,8 +65,17 @@ public class Waiters {
         } else
             return null;
     }
+
+    public static void waitForElementsPresentMoreThan(
+            WebDriver driver, final By locator, final int count) {
+        (new WebDriverWait(driver, 9)).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+               return d.findElements(locator).size() > count;
+            }
+        });
+    }
 }
 
-//#useransw - radiobutton
-//[name = 'answer']
+
 
