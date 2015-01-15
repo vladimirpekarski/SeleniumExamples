@@ -16,6 +16,7 @@ public class LoginPageFlow {
 
     public LoginPageFlow(WebDriver driver) {
         this.driver = driver;
+
     }
 
     public LoginPageFlow typeUserName(String username) {

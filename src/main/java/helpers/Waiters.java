@@ -26,8 +26,7 @@ public class Waiters {
         });
     }
 
-    public static void waitForAnyAlert(
-            WebDriver driver) {
+    public static void waitForAnyAlert(WebDriver driver) {
         (new WebDriverWait(driver, 9)).until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
