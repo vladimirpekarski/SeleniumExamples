@@ -40,4 +40,14 @@ public class Waiters {
             }
         });
     }
+
+    public static void waitForHandlesMoreThan(
+            WebDriver driver, final int handleCount) {
+        (new WebDriverWait(driver, 9)).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return d.getWindowHandles().size() > handleCount;
+            }
+        });
+    }
 }
