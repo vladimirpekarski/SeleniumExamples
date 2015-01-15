@@ -1,7 +1,9 @@
 package helpers;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -50,4 +52,21 @@ public class Waiters {
             }
         });
     }
+
+    public static WebElement waitForElementClickable(
+            WebDriver driver, final By locator) {
+        if((new WebDriverWait(driver, 9)).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return d.findElement(locator).isEnabled();
+            }
+        })) {
+            return driver.findElement(locator);
+        } else
+            return null;
+    }
 }
+
+//#useransw - radiobutton
+//[name = 'answer']
+
