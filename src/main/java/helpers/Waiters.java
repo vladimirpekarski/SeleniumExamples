@@ -75,6 +75,19 @@ public class Waiters {
             }
         });
     }
+
+    public static WebElement waitForTextInElementPresent(
+            WebDriver driver, final By locator, final String text) {
+        if((new WebDriverWait(driver, 9)).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return d.findElement(locator).getText().equals(text);
+            }
+        })) {
+            return driver.findElement(locator);
+        } else
+            return null;
+    }
 }
 
 
