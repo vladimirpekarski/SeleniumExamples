@@ -7,7 +7,6 @@ import pageElements.Table;
 import java.util.List;
 
 public class ElementPageTable {
-
     private final By TABLE_LOCATOR = By.tagName("table");
 
     private Table table;
