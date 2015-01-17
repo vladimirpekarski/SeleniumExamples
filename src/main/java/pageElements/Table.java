@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by asus on 14.01.15.
- */
 public class Table extends ElementBase {
     private final By TR_LOCATOR = By.cssSelector("tbody>tr");
     private final By TH_LOCATOR = By.cssSelector("th");
